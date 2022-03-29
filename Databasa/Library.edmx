@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HospitalDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BolumTbl">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoktorTbl">
+          <Key>
+            <PropertyRef Name="DoktorID" />
+          </Key>
+          <Property Name="DoktorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoktorAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorTel" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="IzinID" Type="int" Nullable="false" />
+          <Property Name="BolumID" Type="int" />
+        </EntityType>
+        <EntityType Name="HastaKaydıTbl">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="HastaneID" Type="int" Nullable="false" />
+          <Property Name="HastaAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tel" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="BolumID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HastaneTbl">
+          <Key>
+            <PropertyRef Name="HastaneID" />
+          </Key>
+          <Property Name="HastaneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SehirKod" Type="int" Nullable="false" />
+          <Property Name="HastaneAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IzinTbl">
+          <Key>
+            <PropertyRef Name="IzinId" />
+          </Key>
+          <Property Name="IzinId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IzinGunu" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RandevuTbl">
+          <Key>
+            <PropertyRef Name="RandevuID" />
+          </Key>
+          <Property Name="RandevuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RandevuGunu" Type="date" Nullable="false" />
+          <Property Name="HastaneID" Type="int" Nullable="false" />
+          <Property Name="YeniHastaTC" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SehirTbl">
+          <Key>
+            <PropertyRef Name="SehirKod" />
+          </Key>
+          <Property Name="SehirKod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SehirAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_DoktorTbl_BolumTbl">
+          <End Role="BolumTbl" Type="Self.BolumTbl" Multiplicity="0..1" />
+          <End Role="DoktorTbl" Type="Self.DoktorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BolumTbl">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="DoktorTbl">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoktorTbl_IzinTbl">
+          <End Role="IzinTbl" Type="Self.IzinTbl" Multiplicity="1" />
+          <End Role="DoktorTbl" Type="Self.DoktorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IzinTbl">
+              <PropertyRef Name="IzinId" />
+            </Principal>
+            <Dependent Role="DoktorTbl">
+              <PropertyRef Name="IzinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaKaydıTbl_BolumTbl">
+          <End Role="BolumTbl" Type="Self.BolumTbl" Multiplicity="1" />
+          <End Role="HastaKaydıTbl" Type="Self.HastaKaydıTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BolumTbl">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="HastaKaydıTbl">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaKaydıTbl_HastaneTbl">
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="1" />
+          <End Role="HastaKaydıTbl" Type="Self.HastaKaydıTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneTbl">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="HastaKaydıTbl">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneTbl_SehirTbl">
+          <End Role="SehirTbl" Type="Self.SehirTbl" Multiplicity="1" />
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SehirTbl">
+              <PropertyRef Name="SehirKod" />
+            </Principal>
+            <Dependent Role="HastaneTbl">
+              <PropertyRef Name="SehirKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandevuTbl_HastaneTbl">
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="1" />
+          <End Role="RandevuTbl" Type="Self.RandevuTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneTbl">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="RandevuTbl">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalDatabaseModelStoreContainer">
+          <EntitySet Name="BolumTbl" EntityType="Self.BolumTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoktorTbl" EntityType="Self.DoktorTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastaKaydıTbl" EntityType="Self.HastaKaydıTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastaneTbl" EntityType="Self.HastaneTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IzinTbl" EntityType="Self.IzinTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RandevuTbl" EntityType="Self.RandevuTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SehirTbl" EntityType="Self.SehirTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DoktorTbl_BolumTbl" Association="Self.FK_DoktorTbl_BolumTbl">
+            <End Role="BolumTbl" EntitySet="BolumTbl" />
+            <End Role="DoktorTbl" EntitySet="DoktorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoktorTbl_IzinTbl" Association="Self.FK_DoktorTbl_IzinTbl">
+            <End Role="IzinTbl" EntitySet="IzinTbl" />
+            <End Role="DoktorTbl" EntitySet="DoktorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaKaydıTbl_BolumTbl" Association="Self.FK_HastaKaydıTbl_BolumTbl">
+            <End Role="BolumTbl" EntitySet="BolumTbl" />
+            <End Role="HastaKaydıTbl" EntitySet="HastaKaydıTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaKaydıTbl_HastaneTbl" Association="Self.FK_HastaKaydıTbl_HastaneTbl">
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+            <End Role="HastaKaydıTbl" EntitySet="HastaKaydıTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneTbl_SehirTbl" Association="Self.FK_HastaneTbl_SehirTbl">
+            <End Role="SehirTbl" EntitySet="SehirTbl" />
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandevuTbl_HastaneTbl" Association="Self.FK_RandevuTbl_HastaneTbl">
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+            <End Role="RandevuTbl" EntitySet="RandevuTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitalDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BolumTbl">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DoktorTbl" Relationship="Self.FK_DoktorTbl_BolumTbl" FromRole="BolumTbl" ToRole="DoktorTbl" />
+          <NavigationProperty Name="HastaKaydıTbl" Relationship="Self.FK_HastaKaydıTbl_BolumTbl" FromRole="BolumTbl" ToRole="HastaKaydıTbl" />
+        </EntityType>
+        <EntityType Name="DoktorTbl">
+          <Key>
+            <PropertyRef Name="DoktorID" />
+          </Key>
+          <Property Name="DoktorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoktorAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoktorSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoktorTel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IzinID" Type="Int32" Nullable="false" />
+          <Property Name="BolumID" Type="Int32" />
+          <NavigationProperty Name="BolumTbl" Relationship="Self.FK_DoktorTbl_BolumTbl" FromRole="DoktorTbl" ToRole="BolumTbl" />
+          <NavigationProperty Name="IzinTbl" Relationship="Self.FK_DoktorTbl_IzinTbl" FromRole="DoktorTbl" ToRole="IzinTbl" />
+        </EntityType>
+        <EntityType Name="HastaKaydıTbl">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HastaneID" Type="Int32" Nullable="false" />
+          <Property Name="HastaAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HastaSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BolumID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BolumTbl" Relationship="Self.FK_HastaKaydıTbl_BolumTbl" FromRole="HastaKaydıTbl" ToRole="BolumTbl" />
+          <NavigationProperty Name="HastaneTbl" Relationship="Self.FK_HastaKaydıTbl_HastaneTbl" FromRole="HastaKaydıTbl" ToRole="HastaneTbl" />
+        </EntityType>
+        <EntityType Name="HastaneTbl">
+          <Key>
+            <PropertyRef Name="HastaneID" />
+          </Key>
+          <Property Name="HastaneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SehirKod" Type="Int32" Nullable="false" />
+          <Property Name="HastaneAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HastaKaydıTbl" Relationship="Self.FK_HastaKaydıTbl_HastaneTbl" FromRole="HastaneTbl" ToRole="HastaKaydıTbl" />
+          <NavigationProperty Name="SehirTbl" Relationship="Self.FK_HastaneTbl_SehirTbl" FromRole="HastaneTbl" ToRole="SehirTbl" />
+          <NavigationProperty Name="RandevuTbl" Relationship="Self.FK_RandevuTbl_HastaneTbl" FromRole="HastaneTbl" ToRole="RandevuTbl" />
+        </EntityType>
+        <EntityType Name="IzinTbl">
+          <Key>
+            <PropertyRef Name="IzinId" />
+          </Key>
+          <Property Name="IzinId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IzinGunu" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DoktorTbl" Relationship="Self.FK_DoktorTbl_IzinTbl" FromRole="IzinTbl" ToRole="DoktorTbl" />
+        </EntityType>
+        <EntityType Name="RandevuTbl">
+          <Key>
+            <PropertyRef Name="RandevuID" />
+          </Key>
+          <Property Name="RandevuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RandevuGunu" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HastaneID" Type="Int32" Nullable="false" />
+          <Property Name="YeniHastaTC" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HastaneTbl" Relationship="Self.FK_RandevuTbl_HastaneTbl" FromRole="RandevuTbl" ToRole="HastaneTbl" />
+        </EntityType>
+        <EntityType Name="SehirTbl">
+          <Key>
+            <PropertyRef Name="SehirKod" />
+          </Key>
+          <Property Name="SehirKod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SehirAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HastaneTbl" Relationship="Self.FK_HastaneTbl_SehirTbl" FromRole="SehirTbl" ToRole="HastaneTbl" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DoktorTbl_BolumTbl">
+          <End Role="BolumTbl" Type="Self.BolumTbl" Multiplicity="0..1" />
+          <End Role="DoktorTbl" Type="Self.DoktorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BolumTbl">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="DoktorTbl">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaKaydıTbl_BolumTbl">
+          <End Role="BolumTbl" Type="Self.BolumTbl" Multiplicity="1" />
+          <End Role="HastaKaydıTbl" Type="Self.HastaKaydıTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BolumTbl">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="HastaKaydıTbl">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoktorTbl_IzinTbl">
+          <End Role="IzinTbl" Type="Self.IzinTbl" Multiplicity="1" />
+          <End Role="DoktorTbl" Type="Self.DoktorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IzinTbl">
+              <PropertyRef Name="IzinId" />
+            </Principal>
+            <Dependent Role="DoktorTbl">
+              <PropertyRef Name="IzinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaKaydıTbl_HastaneTbl">
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="1" />
+          <End Role="HastaKaydıTbl" Type="Self.HastaKaydıTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneTbl">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="HastaKaydıTbl">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneTbl_SehirTbl">
+          <End Role="SehirTbl" Type="Self.SehirTbl" Multiplicity="1" />
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SehirTbl">
+              <PropertyRef Name="SehirKod" />
+            </Principal>
+            <Dependent Role="HastaneTbl">
+              <PropertyRef Name="SehirKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandevuTbl_HastaneTbl">
+          <End Role="HastaneTbl" Type="Self.HastaneTbl" Multiplicity="1" />
+          <End Role="RandevuTbl" Type="Self.RandevuTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneTbl">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="RandevuTbl">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BolumTbl" EntityType="Self.BolumTbl" />
+          <EntitySet Name="DoktorTbl" EntityType="Self.DoktorTbl" />
+          <EntitySet Name="HastaKaydıTbl" EntityType="Self.HastaKaydıTbl" />
+          <EntitySet Name="HastaneTbl" EntityType="Self.HastaneTbl" />
+          <EntitySet Name="IzinTbl" EntityType="Self.IzinTbl" />
+          <EntitySet Name="RandevuTbl" EntityType="Self.RandevuTbl" />
+          <EntitySet Name="SehirTbl" EntityType="Self.SehirTbl" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_DoktorTbl_BolumTbl" Association="Self.FK_DoktorTbl_BolumTbl">
+            <End Role="BolumTbl" EntitySet="BolumTbl" />
+            <End Role="DoktorTbl" EntitySet="DoktorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaKaydıTbl_BolumTbl" Association="Self.FK_HastaKaydıTbl_BolumTbl">
+            <End Role="BolumTbl" EntitySet="BolumTbl" />
+            <End Role="HastaKaydıTbl" EntitySet="HastaKaydıTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoktorTbl_IzinTbl" Association="Self.FK_DoktorTbl_IzinTbl">
+            <End Role="IzinTbl" EntitySet="IzinTbl" />
+            <End Role="DoktorTbl" EntitySet="DoktorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaKaydıTbl_HastaneTbl" Association="Self.FK_HastaKaydıTbl_HastaneTbl">
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+            <End Role="HastaKaydıTbl" EntitySet="HastaKaydıTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneTbl_SehirTbl" Association="Self.FK_HastaneTbl_SehirTbl">
+            <End Role="SehirTbl" EntitySet="SehirTbl" />
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandevuTbl_HastaneTbl" Association="Self.FK_RandevuTbl_HastaneTbl">
+            <End Role="HastaneTbl" EntitySet="HastaneTbl" />
+            <End Role="RandevuTbl" EntitySet="RandevuTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitalDatabaseModelStoreContainer" CdmEntityContainer="HospitalDatabaseEntities">
+          <EntitySetMapping Name="BolumTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.BolumTbl">
+              <MappingFragment StoreEntitySet="BolumTbl">
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+                <ScalarProperty Name="BolumAdı" ColumnName="BolumAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoktorTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.DoktorTbl">
+              <MappingFragment StoreEntitySet="DoktorTbl">
+                <ScalarProperty Name="DoktorID" ColumnName="DoktorID" />
+                <ScalarProperty Name="DoktorAd" ColumnName="DoktorAd" />
+                <ScalarProperty Name="DoktorSoyad" ColumnName="DoktorSoyad" />
+                <ScalarProperty Name="DoktorTel" ColumnName="DoktorTel" />
+                <ScalarProperty Name="IzinID" ColumnName="IzinID" />
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastaKaydıTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.HastaKaydıTbl">
+              <MappingFragment StoreEntitySet="HastaKaydıTbl">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HastaneID" ColumnName="HastaneID" />
+                <ScalarProperty Name="HastaAdı" ColumnName="HastaAdı" />
+                <ScalarProperty Name="HastaSoyad" ColumnName="HastaSoyad" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastaneTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.HastaneTbl">
+              <MappingFragment StoreEntitySet="HastaneTbl">
+                <ScalarProperty Name="HastaneID" ColumnName="HastaneID" />
+                <ScalarProperty Name="SehirKod" ColumnName="SehirKod" />
+                <ScalarProperty Name="HastaneAd" ColumnName="HastaneAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IzinTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.IzinTbl">
+              <MappingFragment StoreEntitySet="IzinTbl">
+                <ScalarProperty Name="IzinId" ColumnName="IzinId" />
+                <ScalarProperty Name="IzinGunu" ColumnName="IzinGunu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RandevuTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.RandevuTbl">
+              <MappingFragment StoreEntitySet="RandevuTbl">
+                <ScalarProperty Name="RandevuID" ColumnName="RandevuID" />
+                <ScalarProperty Name="RandevuGunu" ColumnName="RandevuGunu" />
+                <ScalarProperty Name="HastaneID" ColumnName="HastaneID" />
+                <ScalarProperty Name="YeniHastaTC" ColumnName="YeniHastaTC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SehirTbl">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.SehirTbl">
+              <MappingFragment StoreEntitySet="SehirTbl">
+                <ScalarProperty Name="SehirKod" ColumnName="SehirKod" />
+                <ScalarProperty Name="SehirAd" ColumnName="SehirAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HospitalDatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
