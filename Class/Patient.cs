@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace Class
 {
-    class Patient
+    public class Patient
     {
-        private int tc;
 
-        private int hastaneId;
-
-        private string hastaAdı;
-
-        private string hastaSoyad;
-
-        private int tel;
-
-        private int bolumId;
-
+        public List<Database.HastaKaydıTbl> Listele()
+        {
+            Database.HospitalDatabaseEntities ent = new Database.HospitalDatabaseEntities();
+            var sonuc = ent.HastaKaydıTbl.OrderByDescending(p => p.HastaKaydıTbl).ToList();
+            return sonuc;
+        }
 
     }
 }

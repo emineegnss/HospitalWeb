@@ -62,6 +62,10 @@
       <Project>{cdeb670f-bfd2-42e8-b006-f5354274ba72}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HospitalWeb\HospitalWeb.csproj">
+      <Project>{104f67f0-aa50-4616-baab-bfeab4dfc05f}</Project>
+      <Name>HospitalWeb</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

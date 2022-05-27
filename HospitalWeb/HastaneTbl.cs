@@ -7,24 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace HospitalWeb
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SehirTbl
+    public partial class HastaneTbl
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SehirTbl()
+        public HastaneTbl()
         {
-            this.HastaneTbl = new HashSet<HastaneTbl>();
+            this.HastaKaydıTbl = new HashSet<HastaKaydıTbl>();
+            this.RandevuTbl = new HashSet<RandevuTbl>();
         }
     
+        public int HastaneID { get; set; }
         public int SehirKod { get; set; }
-        public string SehirAd { get; set; }
+        public string HastaneAd { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HastaneTbl> HastaneTbl { get; set; }
-        public object SehirTbl { get; set; }
+        public virtual ICollection<HastaKaydıTbl> HastaKaydıTbl { get; set; }
+        public virtual SehirTbl SehirTbl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RandevuTbl> RandevuTbl { get; set; }
     }
 }

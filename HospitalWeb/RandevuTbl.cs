@@ -7,22 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace HospitalWeb
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class HastaKaydıTbl
+    public partial class RandevuTbl
     {
-        public string HastaTC { get; set; }
+        public int RandevuID { get; set; }
+        public System.DateTime RandevuGunu { get; set; }
         public int HastaneID { get; set; }
-        public string HastaAdı { get; set; }
-        public string HastaSoyad { get; set; }
-        public string Tel { get; set; }
-        public int BolumID { get; set; }
+        public string YeniHastaTC { get; set; }
     
-        public virtual BolumTbl BolumTbl { get; set; }
         public virtual HastaneTbl HastaneTbl { get; set; }
-        public object HastaKaydıTbl { get; set; }
     }
 }

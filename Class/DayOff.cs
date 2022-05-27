@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace Class
 {
-    class DayOff
+    public class DayOff
     {
-        private int izinId;
 
-        private int izinGunu;
-
+        public List<Database.IzinTbl> Listele()
+        {
+            Database.HospitalDatabaseEntities ent = new Database.HospitalDatabaseEntities();
+            var sonuc = ent.IzinTbl.OrderByDescending(p => p.IzinTbl).ToList();
+            return sonuc;
+        }
     }
 }

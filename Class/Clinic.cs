@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Class
 {
-    class Clinic
+    public class Clinic
     {
-        private int BolumId;
-
-        private string BolumAdı;
-
+        public List<Database.BolumTbl> Listele()
+        {
+            Database.HospitalDatabaseEntities ent = new Database.HospitalDatabaseEntities();
+            var sonuc = ent.BolumTbl.OrderByDescending(p => p.BolumTbl).ToList();
+            return sonuc;
+        }
     }
 }

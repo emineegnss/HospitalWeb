@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace HospitalWeb
 {
     using System;
     using System.Collections.Generic;
@@ -23,6 +23,5 @@ namespace Database
     
         public virtual BolumTbl BolumTbl { get; set; }
         public virtual HastaneTbl HastaneTbl { get; set; }
-        public object HastaKaydıTbl { get; set; }
     }
 }

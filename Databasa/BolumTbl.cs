@@ -28,5 +28,6 @@ namespace Database
         public virtual ICollection<DoktorTbl> DoktorTbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HastaKaydıTbl> HastaKaydıTbl { get; set; }
+        public object BolumTbl { get; set; }
     }
 }

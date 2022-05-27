@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Class
 {
-    class Appointment
+    public class Appointment
     {
-        private int randevuId;
-
-        private int RandevuTarih;
-
-        private int HastaneId;
-
-        private int yeniHastaTc;
-
+        public List<Database.RandevuTbl> Listele()
+        {
+            Database.HospitalDatabaseEntities ent = new Database.HospitalDatabaseEntities();
+            var sonuc = ent.RandevuTbl.OrderByDescending(p => p.RandevuTbl).ToList();
+            return sonuc;
+        }
     }
 }

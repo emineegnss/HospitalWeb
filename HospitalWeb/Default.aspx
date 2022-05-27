@@ -22,14 +22,14 @@
         }
     </style>
 </head>
-<body class="img js-fullheight"  style="background-image:url(images1/Screenshot_9.png);" >
+<body class="img js-fullheight"  style="background-image:url(images/Screenshot_9.png);" >
    <section class="ftco-section">
 		<div class="container">
 			
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap py-5" style="background-color:firebrick">
-		      	<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images1/Screenshot_2.jpg);"></div>
+		      	<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/Screenshot_2.jpg);"></div>
 		      	<h3 class="text-center mb-0">E-Randevu</h3>
 		      	<p class="text-center">Aşağıdaki bilgileri girerek oturum açın</p>
 						<form action="#" runat="server" class="login-form">
@@ -59,7 +59,7 @@
 	          <div class="w-100 text-center mt-4 text">
 				   <p class="w-100 text-center">&mdash; Veya Giriş Yap &mdash;</p>
 						<div  align="center">
-							<a  href="https://giris.turkiye.gov.tr/Giris/gir"> <img src="images1/Screenshot_4.jpg" class="auto-style1" /></a>
+							<a  href="https://giris.turkiye.gov.tr/Giris/gir"> <img src="images/Screenshot_4.jpg" class="auto-style1" /></a>
 						</div><br />
 	          	<p class="mb-0"> Hesabınız yok mu? </p>
 		          <a style="color:black; font-weight:900" href="https://localhost:44352/Register.aspx">Kayıt ol</a>

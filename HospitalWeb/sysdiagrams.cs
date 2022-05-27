@@ -7,22 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace HospitalWeb
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class HastaKaydıTbl
+    public partial class sysdiagrams
     {
-        public string HastaTC { get; set; }
-        public int HastaneID { get; set; }
-        public string HastaAdı { get; set; }
-        public string HastaSoyad { get; set; }
-        public string Tel { get; set; }
-        public int BolumID { get; set; }
-    
-        public virtual BolumTbl BolumTbl { get; set; }
-        public virtual HastaneTbl HastaneTbl { get; set; }
-        public object HastaKaydıTbl { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

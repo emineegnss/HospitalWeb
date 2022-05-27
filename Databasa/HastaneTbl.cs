@@ -30,5 +30,6 @@ namespace Database
         public virtual SehirTbl SehirTbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RandevuTbl> RandevuTbl { get; set; }
+        public object HastaneTbl { get; set; }
     }
 }

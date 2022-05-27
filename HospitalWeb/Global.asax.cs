@@ -14,6 +14,9 @@ namespace HospitalWeb
             route.MapPageRoute("Giriş", "GirisYap", "~/Default.aspx");
             route.MapPageRoute("Kayıt", "KayıtOl", "~/Register.aspx");
             route.MapPageRoute("Şifre", "SifreUnuttum", "~/ForgotPassword.aspx");
+            route.MapPageRoute("Doktor", "Doktor", "~/DoktorMaster.aspx");
+            route.MapPageRoute("Hasta", "Hasta", "~/PatientMaster.aspx");
+
         }
         protected void Application_Start(object sender, EventArgs e)
         {

@@ -20,5 +20,6 @@ namespace Database
         public string YeniHastaTC { get; set; }
     
         public virtual HastaneTbl HastaneTbl { get; set; }
+        public object RandevuTbl { get; set; }
     }
 }

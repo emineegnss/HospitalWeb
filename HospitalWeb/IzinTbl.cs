@@ -7,24 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace HospitalWeb
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SehirTbl
+    public partial class IzinTbl
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SehirTbl()
+        public IzinTbl()
         {
-            this.HastaneTbl = new HashSet<HastaneTbl>();
+            this.DoktorTbl = new HashSet<DoktorTbl>();
         }
     
-        public int SehirKod { get; set; }
-        public string SehirAd { get; set; }
+        public int IzinId { get; set; }
+        public string IzinGunu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HastaneTbl> HastaneTbl { get; set; }
-        public object SehirTbl { get; set; }
+        public virtual ICollection<DoktorTbl> DoktorTbl { get; set; }
     }
 }

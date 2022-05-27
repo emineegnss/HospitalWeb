@@ -25,5 +25,6 @@ namespace Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoktorTbl> DoktorTbl { get; set; }
+        public object IzinTbl { get; set; }
     }
 }
